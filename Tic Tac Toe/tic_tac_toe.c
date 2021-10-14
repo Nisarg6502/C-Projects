@@ -1,12 +1,14 @@
 //preprocessor directives
 #include<stdio.h> // header files 
 #include<stdlib.h>
+#include<ctype.h>
 
 //function prototypes
 void SinglePlayer();
 void TwoPlayer();
 void get_player_name(char *player, char symbol);
 void Rules();
+void Game();
 
 //heading design function
 void heading()
@@ -80,9 +82,30 @@ void TwoPlayer()
     get_player_name(second_player, 'O');
 
     Rules();
-
-    
+    Game();
 }
+
+void Game()
+{
+    char s;
+    printf("\n\n   Enter \"S\" to Start:\n");
+    scanf(" %c", &s);
+    //keeps prompting user for input to start
+    while(toupper(s) != 'S' )
+    {
+        printf("\n\n   Enter \"S\" to Start:\n");
+        scanf(" %c", &s);
+    }
+    
+    printf("\n   Game Begins!");
+    char array[9];
+    for(size_t i = 0; i < 9; i++)
+    {
+        array[i] = ' ';
+    }
+}
+
+
 
 //Rules of the game
 void Rules()
