@@ -110,7 +110,7 @@ void Game()
     bool Xturn = true;
     int no_of_turns = 9;
     bool game_over = false;
-    while (game_over == false || no_of_turns > 0)
+    while (game_over == false  && no_of_turns > 0)
     {
         if (Xturn==true)
         {
