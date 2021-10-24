@@ -2,6 +2,7 @@
 #include<stdio.h> // header files 
 #include<stdlib.h>
 #include<ctype.h>
+#include<stdbool.h>
 
 //function prototypes
 void SinglePlayer();
@@ -9,6 +10,8 @@ void TwoPlayer();
 void get_player_name(char *player, char symbol);
 void Rules();
 void Game();
+int GetInput();
+void display(char arr[]);
 
 //heading design function
 void heading()
@@ -101,16 +104,56 @@ void Game()
     char array[9];
     for(size_t i = 0; i < 9; i++)
     {
-        array[i] = ' ';
+        array[i] = i+1+'0';
+        printf("%c", array[i]);
     }
+    bool Xturn = true;
+    int no_of_turns = 9;
+    bool game_over = false;
+    while (game_over == false || no_of_turns > 0)
+    {
+        if (Xturn==true)
+        {
+            printf("\n   Player X enter a number: ");
+            int input = GetInput();
+            printf("%i", input);
+            array[input-1] = 'X';
+            display(array);
+            Xturn = false;
+            no_of_turns--;
+        }
+
+        else{
+            printf("\n   Player O enter a number: ");
+            int input = GetInput();
+            printf("%i", input);
+            array[input-1] = 'O';
+            display(array);
+            Xturn = true;
+            no_of_turns--;
+        }
+        
+    }
+    
+    
 }
 
-
+//shows output of the game
+void display(char arr[])
+{
+    printf("\n\t%c | %c | %c\n\t—— ——— ——\n\t%c | %c | %c\n\t—— ——— ——\n\t%c | %c | %c",arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6],arr[7],arr[8] );
+}
+int GetInput()
+{
+    int x;
+    scanf("%i", &x);
+    return x;
+}
 
 //Rules of the game
 void Rules()
 {
-    printf("\n\n   HOW TO PLAY:\n   1. There are 9 Blocks in this game, divided in 3 Rows and 3 Columns\n   2. Each Player is assigned a symbol.\n   3. Players take turns putting their marks in empty squares using the number pad.\n   4. The blocks are numbered as:\n\t7 | 8 | 9\n\t—— ——— ——\n\t4 | 5 | 6\n\t—— ——— ——\n\t1 | 2 | 3  \n   5. The first player to get 3 of their marks in a row (up, down, across, or diagonally) is the winner.\n   6. When all 9 squares are full, the game is over.\n   7. If no player has 3 marks in a row, the game ends in a tie.");
+    printf("\n\n   HOW TO PLAY:\n   1. There are 9 Blocks in this game, divided in 3 Rows and 3 Columns\n   2. Each Player is assigned a symbol.\n   3. Players take turns putting their marks in empty squares using the number pad.\n   4. The blocks are numbered as:\n\t1 | 2 | 3\n\t—— ——— ——\n\t4 | 5 | 6\n\t—— ——— ——\n\t7 | 8 | 9  \n   5. The first player to get 3 of their marks in a row (up, down, across, or diagonally) is the winner.\n   6. When all 9 squares are full, the game is over.\n   7. If no player has 3 marks in a row, the game ends in a tie.");
 }
 
 //Gets the player name
