@@ -13,6 +13,12 @@ void Game();
 int GetInput();
 void display(char arr[]);
 
+//structure
+struct chances{
+    char array[9];
+    bool used[9];
+} chance;
+
 //heading design function
 void heading()
 {
@@ -99,26 +105,42 @@ void Game()
         printf("\n\n   Enter \"S\" to Start:\n");
         scanf(" %c", &s);
     }
-    
     printf("\n   Game Begins!");
-    char array[9];
+    
+    //declaring arrays for struct
     for(size_t i = 0; i < 9; i++)
     {
-        array[i] = i+1+'0';
-        printf("%c", array[i]);
+        chance.array[i] = i+1+'0';
+        chance.used[i] = false;
+        printf("%c", chance.array[i]);
     }
-    bool Xturn = true;
+
+    bool Xturn = true;//if true then playerX will play
     int no_of_turns = 9;
     bool game_over = false;
+
+    //game begins
     while (game_over == false  && no_of_turns > 0)
-    {
+    {        
         if (Xturn==true)
         {
             printf("\n   Player X enter a number: ");
             int input = GetInput();
             printf("%i", input);
-            array[input-1] = 'X';
-            display(array);
+            for (size_t i = 0; i < 9; i++)
+            {
+                if (chance.used[input-1]==false)
+                {
+                    break;
+                }
+
+                
+            }
+            chance.array[input-1] = 'X';
+            chance.used[input-1] = true;
+            
+            
+            display(chance.array);
             Xturn = false;
             no_of_turns--;
         }
@@ -127,8 +149,9 @@ void Game()
             printf("\n   Player O enter a number: ");
             int input = GetInput();
             printf("%i", input);
-            array[input-1] = 'O';
-            display(array);
+            chance.array[input-1] = 'O';
+            chance.used[input-1] = true;
+            display(chance.array);
             Xturn = true;
             no_of_turns--;
         }
